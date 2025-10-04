@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/AJStill99/qa-automation-journey/issues"
   },
-  "homepage": "https://github.com/AJStill99/qa-automation-journey#readme"
+  "homepage": "https://github.com/AJStill99/qa-automation-journey#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.1"
+  }
 }
