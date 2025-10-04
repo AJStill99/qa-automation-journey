@@ -1,5 +1,12 @@
 // Area where I'll write some functions to practice JS
 
+// Variables and initialising
+let URL = "https://example.com"; // Example URL
+let counter = 0; // might be useful for loops
+let name = "Alex"; // Example name
+
+
+
 //Constructor Function vs Class
 
 // Older Way
@@ -8,7 +15,7 @@ function Person(name, age) {
   this.age = age;
 
   this.sayHello = function() {
-    console.log(`Hi, my name is ${this.name} and I’m ${this.age} years old.`);
+    console.log(`Hi, my name is ${this.name} and I'm ${this.age} years old.`);
   };
 }
 
@@ -24,7 +31,7 @@ class Person {
   }
 
   sayHello() {
-    console.log(`Hi, my name is ${this.name} and I’m ${this.age} years old.`);
+    console.log(`Hi, my name is ${this.name} and I'm ${this.age} years old.`);
   }
 }
 
@@ -34,10 +41,6 @@ person2.sayHello();  // Output: Hi, my name is Bob and I’m 30 years old.
 
 // Both methods create objects with the same properties and methods, but the class syntax is more concise and easier to read.
 // Used to create a 'blueprint' for objects
-
-
-
-let URL = "https://example.com"; // Example URL
 
 function joinStrings(str1, str2) {
     combinedStr = str1 + ' ' + str2;
