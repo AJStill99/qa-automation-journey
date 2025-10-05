@@ -82,5 +82,5 @@ testWebsite(URL);
 
 // Exporting functions for use in other files
 
-module.exports = { joinStrings, reverseString };
+module.exports = { joinStrings, reverseString, compareStrings, testWebsite };
 
