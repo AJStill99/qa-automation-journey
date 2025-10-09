@@ -1,9 +1,7 @@
 const { expect } = require('@playwright/test');
+const fs = require('fs');
 
-const timeStamp = new Date().toISOString().replace(/[:.]/g, '-'); // generate timestamp now
-const filePath = `test-results/Failing_Images/Fail_Img_${timeStamp}.png`;
-
-// This is known as a utility function file, full of helper functions
+// Utility helper functions for Playwright
 
 async function navigateToLogin(page) {
   await page.goto('https://example.com/login');
@@ -15,6 +13,8 @@ async function performLogin(page, username, password) {
   await page.fill('#username', username);
   await page.fill('#password', password);
   await page.click('#submit');
+
+  await expect(page.locator('h1')).toHaveText('Logged In Successfully');
 }
 
 async function verifyPageTitle(page, expectedTitle) {
@@ -27,12 +27,31 @@ async function verifyPageTitle(page, expectedTitle) {
 async function verifyLoginSuccess(page, username) {
   await expect(page).toHaveURL(/dashboard/);
   await expect(page.locator('#welcomeMessage')).toHaveText(`Welcome, ${username}!`);
-  // not sure on this one, how do I make page.locator dynamic?
   console.log('✅ Login verification passed successfully!');
 }
 
-module.exports = ( filePath, timeStamp ); // exporting variables too for use in other files
-// Exporting variables so they can be used in other files
-module.exports = { navigateToLogin, performLogin, verifyPageTitle, verifyLoginSuccess };
-// Exporting functions so they can be used in other files
+async function safePerformLogin(page, username, password) {
+  try {
+    await performLogin(page, username, password);
+  } catch (error) {
+    const timeStamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const dir = 'test-results/Failing_Images';
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
+    const filePath = `${dir}/Fail_Img_${timeStamp}.png`;
+    console.error('❌ Error during login process:', error);
+    // Moved to here to ensure directory exists before saving
+    // Avoids any duplicate images
+    await page.screenshot({ path: filePath });
+    console.log(`📸 Screenshot saved to: ${filePath}`);
+    throw error;
+  }
+}
+
+module.exports = { 
+  navigateToLogin, 
+  performLogin, 
+  verifyPageTitle, 
+  verifyLoginSuccess, 
+  safePerformLogin
+};
