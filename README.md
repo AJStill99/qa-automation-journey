@@ -13,6 +13,15 @@ Hello, I am Alex, currently a QA Analyst with a focus on manual testing and test
 I have been doing QA Testing/Analysis for 2 years, with a high focus on web based applications using JavaScript, Laravell, and C# to name some notable languages. 
 My education was in Physics, and had a heavy empthasis on data collection, manipulation, and analysis. 
 
+This project outline:
+This project will use Playwright for test automation, covering UI automation, basic error handling, and testing + coding integration fundamentals to allow tests to continue in case of a 'failure' - some core fundamentals of QA Automation and Engineering
+
+Playwright will use multiple browser support for testing, using some test websites to get the automated tests up and running for showcase. 
+
+Later on I will cover Postman in more detail to test API's
+
+
+
 Stack used in this project:
 - JavaScript
 - Playwright testing framework
