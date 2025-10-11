@@ -1,0 +1,23 @@
+{
+  "name": "qa-automation-journey",
+  "version": "1.0.0",
+  "description": "Initial project to show my ongoing progression into a QA Engineering role from QA Analyst, focusing on Automation, CI/CD and SQL",
+  "main": "day2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AJStill99/qa-automation-journey.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AJStill99/qa-automation-journey/issues"
+  },
+  "homepage": "https://github.com/AJStill99/qa-automation-journey#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.1"
+  }
+}
