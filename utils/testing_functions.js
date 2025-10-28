@@ -71,6 +71,14 @@ async function safePerformLogin(page, username, password) {
   }
 }
 
+async function handleAlert(page, expectedMessage) {
+  page.once('dialog', async dialog => {
+    expect(dialog.message()).toContain(expectedMessage);
+    await dialog.accept();
+  });
+}
+
+
 
 module.exports = { 
   navigateToLogin, 
@@ -81,5 +89,6 @@ module.exports = {
   verifyLoggedIn,
   fillCreatePostForm,
   submitForm,
-  verifyPostCreated
+  verifyPostCreated,
+  handleAlert
 };
