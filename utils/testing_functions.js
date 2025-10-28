@@ -78,7 +78,31 @@ async function handleAlert(page, expectedMessage) {
   });
 }
 
+export async function handleConfirm(page, { expectedMessage, action = 'accept' } = {}) {
+  page.once('dialog', async dialog => {
+    if (expectedMessage) {
+      expect(dialog.message()).toContain(expectedMessage);
+    }
+    if (action === 'accept') {
+      await dialog.accept();
+    } else {
+      await dialog.dismiss();
+    }
+  });
+}
 
+export async function handlePrompt(page, { expectedMessage, inputText = '', action = 'accept' } = {}) {
+  page.once('dialog', async dialog => {
+    if (expectedMessage) {
+      expect(dialog.message()).toContain(expectedMessage);
+    }
+    if (action === 'accept') {
+      await dialog.accept(inputText); // Send input
+    } else {
+      await dialog.dismiss();
+    }
+  });
+}
 
 module.exports = { 
   navigateToLogin, 
