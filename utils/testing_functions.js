@@ -78,7 +78,7 @@ async function handleAlert(page, expectedMessage) {
   });
 }
 
-export async function handleConfirm(page, { expectedMessage, action = 'accept' } = {}) {
+async function handleConfirm(page, { expectedMessage, action = 'accept' } = {}) {
   page.once('dialog', async dialog => {
     if (expectedMessage) {
       expect(dialog.message()).toContain(expectedMessage);
@@ -91,7 +91,7 @@ export async function handleConfirm(page, { expectedMessage, action = 'accept' }
   });
 }
 
-export async function handlePrompt(page, { expectedMessage, inputText = '', action = 'accept' } = {}) {
+async function handlePrompt(page, { expectedMessage, inputText = '', action = 'accept' } = {}) {
   page.once('dialog', async dialog => {
     if (expectedMessage) {
       expect(dialog.message()).toContain(expectedMessage);
@@ -104,6 +104,19 @@ export async function handlePrompt(page, { expectedMessage, inputText = '', acti
   });
 }
 
+async function uploadFile(page, selector, filePath) {
+  await page.setInputFiles(selector, filePath);
+}
+
+async function downloadFile(page, clickSelector, savePath) {
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.click(clickSelector)
+  ]);
+  await download.saveAs(savePath);
+  return download;
+}
+
 module.exports = { 
   navigateToLogin, 
   performLogin, 
@@ -114,5 +127,9 @@ module.exports = {
   fillCreatePostForm,
   submitForm,
   verifyPostCreated,
-  handleAlert
+  handleAlert,
+  handleConfirm,
+  handlePrompt,
+  uploadFile,
+  downloadFile
 };
