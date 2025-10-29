@@ -117,6 +117,18 @@ async function downloadFile(page, clickSelector, savePath) {
   return download;
 }
 
+async function getTableRowByText(page, tableSelector, searchText) {
+  const rows = page.locator(`${tableSelector} tr`);
+  const count = await rows.count();
+  for(let i = 0; i < count; i++) {
+    const rowText = await rows.nth(i).textContent();
+    if(rowText.includes(searchText)) {
+      return rows.nth(i);
+    }
+  }
+  return null;
+}
+
 module.exports = { 
   navigateToLogin, 
   performLogin, 
